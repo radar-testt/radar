@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رادار – اختبار اليوم</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F2328;--teal:#0E6E6B;--mint:#E2EFEA;--bg:#F7F9F8;--line:#DCE5E2;--amber:#D9952B;--ok:#15803D;--okbg:#E8F6EC;--bad:#B42318;--badbg:#FDECEA;--muted:#4F6266}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:17px;line-height:1.7}
+.hdr{position:relative;overflow:hidden;background:var(--ink);color:#EAF4F2;padding:18px 20px}
+.hdr .r{position:absolute;border-radius:50%;border:1px solid #24585C}
+.hdr .r1{left:-60px;top:-80px;width:200px;height:200px}.hdr .r2{left:-10px;top:-30px;width:110px;height:110px;border-color:#2C6C6E}
+.hdr .b{position:absolute;left:84px;top:22px;width:9px;height:9px;border-radius:50%;background:#F2B04E}
+.hdr .in{position:relative;max-width:640px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-family:'Readex Pro',sans-serif;font-weight:700;font-size:26px;color:#fff}
+.sub{font-size:14px;color:#8FD3C8;font-weight:600}
+.wrap{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.hide{display:none}
+h1{font-family:'Readex Pro',sans-serif;font-size:24px;margin:0 0 6px}
+.muted{color:var(--muted)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:inherit;font-weight:700;cursor:pointer;margin-top:14px;text-decoration:none}
+.btn.ghost{background:var(--mint);color:var(--ink)}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:16px}.bar i{display:block;height:100%;background:var(--teal);transition:width .3s}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--teal);background:var(--mint);border-radius:99px;padding:2px 12px;margin-bottom:10px}
+.q{font-size:19px;font-weight:600;margin:0 0 14px}
+.q .pair{font-family:'Readex Pro',sans-serif;font-size:22px}
+.q u{text-decoration-color:var(--teal);text-decoration-thickness:2px;text-underline-offset:5px}
+.opt{display:flex;gap:10px;align-items:center;width:100%;text-align:right;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;font:inherit;color:inherit;cursor:pointer;min-height:50px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt .l{flex:none;width:30px;height:30px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:700;font-size:15px}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}.opt.bad .l{background:var(--bad);color:#fff}
+.opt:disabled{cursor:default}
+.exp{display:none;background:var(--mint);border-radius:14px;padding:14px 16px;margin-top:4px}
+.exp.show{display:block}
+.exp h4{margin:0 0 4px;font-size:16px}
+.exp p{margin:0}
+.vid{display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:var(--teal);font-weight:700;font-size:15px;text-decoration:none}
+.vid small{color:var(--muted);font-weight:500}
+.score{text-align:center}
+.big{font-family:'Readex Pro',sans-serif;font-size:56px;font-weight:700;color:var(--teal);line-height:1.2}
+.rows{margin-top:14px;text-align:right}
+.rows div{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:8px 0;font-size:15px}
+.advice{text-align:right;margin-top:16px}
+.advice h3{font-family:'Readex Pro',sans-serif;font-size:19px;margin:0 0 6px}
+.advice p{margin:0 0 8px;font-size:15px}
+.adv{background:#FDF6EC;border:1px solid #F0D9B5;border-radius:14px;padding:12px 14px;margin-top:10px}
+.adt{font-weight:700;color:#7A4A0C}.adt small{font-weight:500;color:var(--muted)}
+.copied{font-size:14px;color:var(--ok);min-height:20px;margin-top:6px}
+.foot{text-align:center;font-size:13px;color:var(--muted);margin-top:20px}
+</style>
+</head>
+<body>
+<header class="hdr"><div class="r r1"></div><div class="r r2"></div><div class="b"></div>
+<div class="in"><div><div class="logo">رادار</div><div class="sub">نلقط لك السؤال قبل لا يجيك</div></div><div class="sub" id="dateLbl"></div></div></header>
+
+<main class="wrap">
+<section id="start" class="card">
+<span class="tag">اختبار اليوم</span>
+<h1>١٠ أسئلة قدرات: ٥ لفظي و٥ كمي</h1>
+<p class="muted">حل كل سؤال، وبتطلع لك الإجابة مع شرح مبسّط ورابط فيديو للقاعدة. في النهاية تشوف درجتك وأي قسم تحتاج تركّز عليه.</p>
+<button class="btn" type="button" onclick="begin()">ابدأ الاختبار</button>
+</section>
+
+<section id="quiz" class="card hide">
+<div class="meta"><span id="sec"></span><span id="cnt"></span></div>
+<div class="bar"><i id="prog"></i></div>
+<span class="tag" id="tag"></span>
+<div class="q" id="qtext"></div>
+<div id="opts"></div>
+<div class="exp" id="exp"></div>
+<button class="btn hide" type="button" id="next" onclick="next()"></button>
+</section>
+
+<section id="done" class="card score hide">
+<div class="muted">نتيجتك في اختبار اليوم</div>
+<div class="big" id="sc"></div>
+<div id="msg" style="font-weight:600"></div>
+<div class="rows" id="rows"></div>
+<div class="advice" id="advice"></div>
+<button class="btn" type="button" onclick="share()">انسخ نتيجتك وشاركها</button>
+<div class="copied" id="copied" aria-live="polite"></div>
+<button class="btn ghost" type="button" onclick="begin()">أعد الاختبار</button>
+</section>
+<p class="foot">أسئلة تدريبية من إعداد رادار، وشروحات الفيديو مملوكة لأصحابها على يوتيوب.</p>
+</main>
+
+<script>
+const V=(id,s)=>`https://www.youtube.com/watch?v=${id}&t=${s}s`;
+const Q=[
+{s:'لفظي',t:'تناظر لفظي',q:'<span class="pair">مِحراث : فلاح</span>',o:['كتاب : مكتبة','مِشرط : جرّاح','ماء : عطش','سيارة : طريق'],a:1,e:'العلاقة: أداة وصاحب المهنة الذي يستخدمها. المحراث أداة الفلاح، والمِشرط أداة الجرّاح.',v:['VgWXo7GNmJo',55,'٠:٥٥','٤:٠٠']},
+{s:'لفظي',t:'تناظر لفظي',q:'<span class="pair">أمانة : خيانة</span>',o:['صدق : إخلاص','علم : قلم','وفاء : غدر','صبر : انتظار'],a:2,e:'العلاقة: تضاد. الأمانة عكس الخيانة، والوفاء عكس الغدر.',v:['VgWXo7GNmJo',55,'٠:٥٥','٤:٠٠']},
+{s:'لفظي',t:'إكمال الجمل',q:'من سار على الدرب ......',o:['تعب','ضلّ','وصل','رجع'],a:2,e:'المثل: «من سار على الدرب وصل»، أي أن الاستمرار يوصل إلى الهدف.',v:['HHNFT02ogyc',0,'٠:٠٠','٣:٠٠']},
+{s:'لفظي',t:'الخطأ السياقي',q:'استيقظ أحمد <u>متأخراً</u> فوصل إلى المدرسة <u>مبكراً</u> ووجد <u>الحصة</u> الأولى قد <u>انتهت</u>.',o:['متأخراً','مبكراً','الحصة','انتهت'],a:1,e:'انتهاء الحصة يدل على أنه وصل متأخراً، فكلمة «مبكراً» تعاكس السياق.',v:['hJK70e8VgPE',0,'٠:٠٠','٢:٥٥']},
+{s:'لفظي',t:'المفردة الشاذة',q:'ما الكلمة المختلفة عن البقية؟',o:['قلم','ممحاة','مسطرة','ملعقة'],a:3,e:'القلم والممحاة والمسطرة أدوات مدرسية، أما الملعقة فأداة مطبخ.'},
+{s:'كمي',t:'النسبة المئوية',q:'إذا كان ٢٠٪ من عدد يساوي ٣٠، فما العدد؟',o:['١٢٠','١٥٠','١٨٠','٦٠٠'],a:1,e:'٢٠٪ = خُمس العدد. إذن العدد = ٣٠ × ٥ = ١٥٠.',v:['gvoLsIx5FcA',1079,'١٧:٥٩','١٩:٠١']},
+{s:'كمي',t:'التناسب العكسي',q:'٦ عمال ينجزون عملاً في ١٠ أيام. في كم يوماً ينجزه ١٥ عاملاً بالسرعة نفسها؟',o:['٤','٥','٦','٢٥'],a:0,e:'العمل كله = ٦ × ١٠ = ٦٠ (عامل × يوم). مع ١٥ عاملاً: ٦٠ ÷ ١٥ = ٤ أيام.',v:['hcZUBWVKEYU',488,'٨:٠٨','٩:٥٠']},
+{s:'كمي',t:'السرعة والمسافة',q:'قطار سرعته ٨٠ كم/س. كم كيلومتراً يقطع في ساعتين ونصف؟',o:['١٦٠','١٨٠','٢٠٠','٢٤٠'],a:2,e:'المسافة = السرعة × الزمن = ٨٠ × ٢٫٥ = ٢٠٠ كم.',v:['-G0RXt2yS_Y',23,'٠:٢٣','٦:١٨']},
+{s:'كمي',t:'مقارنة',q:'القيمة الأولى: ٣/٥ — القيمة الثانية: ٠٫٦',o:['القيمة الأولى أكبر','القيمة الثانية أكبر','القيمتان متساويتان','المعطيات غير كافية'],a:2,e:'٣/٥ = ٦/١٠ = ٠٫٦، إذن القيمتان متساويتان.',v:['QM2Md9fX6Qk',810,'١٣:٣٠','١٧:٠٧']},
+{s:'كمي',t:'الخصم المتتالي',q:'سعر قميص ١٥٠ ريالاً، عليه خصم ٢٠٪ ثم خصم إضافي ١٠٪ على السعر الجديد. كم السعر النهائي؟',o:['١٠٥','١٠٨','١١٢','١٢٠'],a:1,e:'بعد الخصم الأول: ١٥٠ × ٠٫٨ = ١٢٠. بعد الخصم الثاني: ١٢٠ × ٠٫٩ = ١٠٨ ريالات. (ليس خصم ٣٠٪ مباشرة!)',v:['fQ-lOyaeSAU',1037,'١٧:١٧','١٩:٤٩']}
+];
+const ADV={
+'تناظر لفظي':'قبل ما تشوف الخيارات، كوّن جملة تربط الكلمتين (مثل: «المحراث أداة يستخدمها الفلاح») ثم طبّق نفس الجملة على كل خيار. احفظ أشهر العلاقات: تضاد، ترادف، جزء من كل، أداة واستخدامها، سبب ونتيجة.',
+'إكمال الجمل':'اقرأ الجملة كاملة مع كل خيار، وانتبه لأدوات الربط («لكن، رغم، لذلك، بل») لأنها تحدد هل المعنى متوافق أو متعاكس. وراجع الأمثال والحكم المشهورة لأنها تتكرر.',
+'الخطأ السياقي':'ابحث عن الكلمة اللي «تعاكس» بقية الجملة. اسأل نفسك: لو غيّرت هالكلمة لضدها، هل يستقيم المعنى؟ الكلمات الأخرى في الجملة هي دليلك.',
+'المفردة الشاذة':'حدّد الصفة المشتركة بين ثلاث كلمات (نفس المجال أو الاستخدام)، والكلمة اللي ما تشاركهم هي الجواب.',
+'النسبة المئوية':'احفظ النسب المشهورة كسوراً: ٢٠٪ = ١/٥، ٢٥٪ = ١/٤، ٥٠٪ = ١/٢. ولإيجاد الكل من الجزء: اقسم الجزء على النسبة.',
+'التناسب العكسي':'اسأل: لو زادت الكمية الأولى، هل الثانية تزيد أو تنقص؟ إذا تنقص (عمال أكثر = أيام أقل) فاضرب ثم اقسم، ولا تستخدم الضرب التبادلي.',
+'السرعة والمسافة':'احفظ المثلث: المسافة = السرعة × الزمن. وحوّل الدقائق إلى ساعات قبل التعويض (نص ساعة = ٠٫٥).',
+'مقارنة':'حوّل القيمتين لنفس الصورة (كسر أو عدد عشري) قبل المقارنة. ٣/٥ = ٠٫٦ = ٦٠٪.',
+'الخصم المتتالي':'الخصومات المتتالية لا تُجمع! طبّق كل خصم على السعر الجديد، أو افترض السعر ١٠٠ لتسهيل الحساب.'
+};
+const L=['أ','ب','ج','د'];let i=0,score=0,res=[];
+const $=id=>document.getElementById(id);
+const AR=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+try{$('dateLbl').textContent=new Date().toLocaleDateString('ar-SA-u-ca-gregory-nu-arab',{day:'numeric',month:'long'})}catch(e){}
+function show(id){['start','quiz','done'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
+function begin(){i=0;score=0;res=[];show('quiz');render()}
+function render(){const q=Q[i];$('sec').textContent='القسم '+q.s;$('cnt').textContent='سؤال '+AR(i+1)+' من '+AR(Q.length);$('prog').style.width=(i/Q.length*100)+'%';$('tag').textContent=q.t;$('qtext').innerHTML=q.q;
+$('opts').innerHTML=q.o.map((o,j)=>`<button type="button" class="opt" onclick="pick(${j})"><span class="l">${L[j]}</span><span>${o}</span></button>`).join('');$('exp').className='exp';$('next').classList.add('hide')}
+function pick(j){const q=Q[i],b=[...document.querySelectorAll('.opt')];b.forEach(x=>x.disabled=true);b[q.a].classList.add('ok');const r=j===q.a;if(r)score++;else b[j].classList.add('bad');res.push({s:q.s,t:q.t,r,i});
+const vid=q.v?`<a class="vid" href="${V(q.v[0],q.v[1])}" target="_blank" rel="noopener">▶ شرح الفيديو <small>(من ${q.v[2]} إلى ${q.v[3]})</small></a>`:'';
+$('exp').innerHTML=`<h4 style="color:var(--${r?'ok':'bad'})">${r?'إجابة صحيحة 👏':'الإجابة الصحيحة: '+L[q.a]+') '+q.o[q.a]}</h4><p>${q.e}</p>${vid}`;$('exp').classList.add('show');
+$('next').textContent=i<Q.length-1?'السؤال التالي ←':'شوف نتيجتك';$('next').classList.remove('hide')}
+function next(){if(i<Q.length-1){i++;render();window.scrollTo(0,0)}else finish()}
+function finish(){show('done');const p=score/Q.length;$('sc').textContent=AR(score)+' / '+AR(Q.length);
+$('msg').textContent=p>=.9?'ممتاز! أنت جاهز 🌟':p>=.7?'أداء قوي، راجع أخطاءك وتكون جاهز 💪':p>=.5?'بداية طيبة، ركّز على الشروحات 📘':'لا بأس، اقرأ الشروحات وأعد المحاولة 🔁';
+const sec=['لفظي','كمي'].map(s=>{const a=res.filter(x=>x.s===s);return `<div><span>القسم ${s}</span><b>${AR(a.filter(x=>x.r).length)} / ${AR(a.length)}</b></div>`}).join('');$('rows').innerHTML=sec;$('copied').textContent='';
+const wrong=res.filter(x=>!x.r);let h='';
+if(!wrong.length){h='<h3>تحليل أخطائك</h3><p>ما أخطأت في ولا سؤال 👏 حافظ على مستواك، وجرّب اختبار بكرة، وركّز على السرعة في الحل.</p>'}
+else{const by={};wrong.forEach(x=>{(by[x.t]=by[x.t]||[]).push(x)});
+const vw=wrong.filter(x=>x.s==='لفظي').length,qw=wrong.length-vw;
+const focus=vw>qw?'وأغلبها في <b>القسم اللفظي</b>':qw>vw?'وأغلبها في <b>القسم الكمي</b>':'وتوزعت بالتساوي بين القسمين';
+h=`<h3>تحليل أخطائك</h3><p>أخطأت في ${AR(wrong.length)} ${wrong.length===1?'سؤال':wrong.length===2?'سؤالين':'أسئلة'}، ${focus}. هذي المهارات اللي تحتاج تركّز عليها:</p>`+
+Object.entries(by).map(([t,xs])=>{const q=Q[xs[0].i];const vid=q.v?`<a class="vid" href="${V(q.v[0],q.v[1])}" target="_blank" rel="noopener">▶ شاهد شرح القاعدة <small>(من ${q.v[2]} إلى ${q.v[3]})</small></a>`:'';
+return `<div class="adv"><div class="adt">${t} <small>(${xs.length>2?AR(xs.length)+' ':''}${xs.length===1?'خطأ واحد':xs.length===2?'خطآن':'أخطاء'} – سؤال ${xs.map(x=>AR(x.i+1)).join(' و')})</small></div><p>${ADV[t]||''}</p>${vid}</div>`}).join('')+
+'<p class="muted" style="margin-top:10px">نصيحة رادار: أعد الأسئلة اللي أخطأت فيها بعد ما تشوف الشرح، وراجع نفس الباب في كتاب رادار.</p>'}
+$('advice').innerHTML=h}
+function share(){const t=`حليت اختبار رادار اليومي وجبت ${AR(score)} من ${AR(Q.length)} 🎯 جرّبه بنفسك!`;
+const done=()=>{$('copied').textContent='تم النسخ، الصقه في أي محادثة ✔'};
+try{navigator.clipboard.writeText(t).then(done,()=>{$('copied').textContent=t})}catch(e){$('copied').textContent=t}}
+</script>
+</body>
+</html>
